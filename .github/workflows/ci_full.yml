@@ -1,4 +1,4 @@
-name: Automação Selenium - Compra Standard
+name: Automação Selenium - e-commerce Saucedemo
 on: [push, pull_request]
 
 jobs:
