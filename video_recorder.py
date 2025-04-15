@@ -3,8 +3,6 @@ import os
 from selenium import webdriver
 from PIL import Image
 import io
-import imageio.v2 as imageio
-from moviepy.editor import ImageSequenceClip
 
 class VideoRecorder:
     def __init__(self, driver: webdriver.Chrome, output_dir="video"):
@@ -37,14 +35,10 @@ class VideoRecorder:
         # Redimensiona a imagem para um tamanho menor (opcional)
         image = image.resize((800, 600), Image.Resampling.LANCZOS)
 
-        # Salva a imagem temporariamente
-        temp_path = os.path.join(self.output_dir, f"temp_{len(self.frames)}.png")
-        image.save(temp_path)
-
-        self.frames.append(temp_path)
+        self.frames.append(image)
 
     def stop_recording(self, test_name="test"):
-        """Para a gravação e salva o vídeo em MP4"""
+        """Para a gravação e salva o vídeo em GIF"""
         if not self.recording:
             return
 
@@ -56,17 +50,20 @@ class VideoRecorder:
 
         # Gera o nome do arquivo com timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{test_name}_{timestamp}.mp4"
+        filename = f"{test_name}_{timestamp}.gif"
         output_path = os.path.join(self.output_dir, filename)
 
         try:
-            # Cria o vídeo a partir das imagens
-            clip = ImageSequenceClip(self.frames, fps=10)
-            clip.write_videofile(output_path, codec='libx264')
+            # Salva o GIF animado
+            self.frames[0].save(
+                output_path,
+                save_all=True,
+                append_images=self.frames[1:],
+                optimize=True,
+                duration=100,  # 100ms entre frames = 10fps
+                loop=0
+            )
             print(f"Vídeo salvo em: {output_path}")
         finally:
-            # Limpa os arquivos temporários
-            for frame_path in self.frames:
-                if os.path.exists(frame_path):
-                    os.remove(frame_path)
+            # Limpa os frames
             self.frames = []
