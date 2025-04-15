@@ -1,0 +1,5 @@
+$env:HEADLESS='false'
+$env:HEADLESS='true'
+
+
+pytest --html=relatorio_teste.html
