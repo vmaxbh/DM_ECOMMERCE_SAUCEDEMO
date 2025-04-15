@@ -35,18 +35,22 @@ jobs:
         pip install moviepy==1.0.3 imageio==2.34.1 imageio-ffmpeg==0.6.0
 
     - name: Create pytest configuration
+      shell: pwsh
       run: |
-        @"[pytest]
-        addopts =
-            -v
-            --html=relatorio_teste.html
-            --self-contained-html
-            --capture=sys
-            --show-capture=log
-        metadata =
-            Runner: GitHub Actions
-            Python: 3.9
-            Platform: Windows"@ > pytest.ini
+        $pytestConfig = @"
+[pytest]
+addopts =
+    -v
+    --html=relatorio_teste.html
+    --self-contained-html
+    --capture=sys
+    --show-capture=log
+metadata =
+    Runner: GitHub Actions
+    Python: 3.9
+    Platform: Windows
+"@
+        $pytestConfig | Out-File -FilePath pytest.ini -Encoding utf8 -Force
 
     - name: Run Standard Test
       run: |
