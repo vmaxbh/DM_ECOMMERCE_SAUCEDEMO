@@ -253,4 +253,4 @@ Este projeto foi desenvolvido como parte do processo seletivo para a vaga de QA 
 
 Maxwell - [vmaxbh@gmail.com](mailto:vmaxbh@gmail.com)
 
-Project Link: [https://github.com/seu-usuario/DM_ECOMMERCE_SAUCEDEMO](https://github.com/seu-usuario/DM_ECOMMERCE_SAUCEDEMO)
+Project Link: [https://github.com/vmaxbh/DM_ECOMMERCE_SAUCEDEMO](https://github.com/vmaxbh/DM_ECOMMERCE_SAUCEDEMO)
