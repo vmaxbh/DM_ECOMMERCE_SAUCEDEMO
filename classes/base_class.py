@@ -4,8 +4,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.remote.webelement import WebElement
-from functools import wraps
 from selenium.webdriver.common.by import By
 
 
@@ -57,13 +55,4 @@ class BaseClass:
         element = self.get_element_presence(xpath)
         self.scroll_to_element_webelement(element)
 
-    def enter_iframe(self, path_iframe):
-        if isinstance(path_iframe, int):
-            self.driver.switch_to.frame(path_iframe)
-        else:
-            iframe_element = self.driver.find_element(By.XPATH, path_iframe)
-            self.driver.switch_to.frame(iframe_element)
-        time.sleep(1)
 
-    def exit_iframe(self):
-        self.driver.switch_to.default_content()

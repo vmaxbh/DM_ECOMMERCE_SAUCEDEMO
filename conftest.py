@@ -57,3 +57,8 @@ def delete_screenshot_folder():
         print(f"A pasta {folder_name} foi apagada com sucesso.")
     else:
         print(f"A pasta {folder_name} não existe.")
+
+
+def pytest_html_report_title(report):
+    """Hook para configurar o título do relatório HTML"""
+    report.title = "DM- Teste de Capacitação Técnica - Maxwell e-commerce Saucedemo"

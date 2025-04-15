@@ -30,56 +30,38 @@ jobs:
 
     - name: Create pytest configuration
       run: |
-        @"
-        [pytest]
-        addopts = 
+        @"[pytest]
+        addopts =
             -v
-            --html={htmlpath}
+            --html=relatorio_teste.html
             --self-contained-html
             --capture=sys
             --show-capture=log
         metadata =
             Runner: GitHub Actions
             Python: 3.9
-            Platform: Windows
-        "@ > pytest.ini
+            Platform: Windows"@ > pytest.ini
 
     - name: Run Standard Test
       run: |
-        python -m pytest test_execution/test_execution_compra_standard.py --html=relatorio_standard.html --self-contained-html
-      
-    - name: Run Visual True Test
-      run: |
-        python -m pytest test_execution/test_execution_compra_visual_true.py --html=relatorio_visual_true.html --self-contained-html
-      
-    - name: Run Problem Test
-      run: |
-        python -m pytest test_execution/test_execution_compra_problem.py --html=relatorio_problem.html --self-contained-html
+        pytest --html=relatorio_teste.html
 
     - name: Process and upload reports
       shell: pwsh
       run: |
-        # Processa cada relatório individualmente
-        $files = @("relatorio_standard.html", "relatorio_visual_true.html", "relatorio_problem.html")
-        
-        foreach ($file in $files) {
-            if (Test-Path $file) {
-                $content = Get-Content -Path $file -Raw
-                $content = $content -replace '<\s*br\s*/?>', '<br>' -replace '<\s*/\s*div\s*>', '</div>'
-                $processedName = "processed_$file"
-                $content | Out-File -FilePath $processedName -Encoding utf8 -Force
-                Write-Output "Processed $file to $processedName"
-            } else {
-                Write-Warning "File $file not found!"
-            }
+        if (Test-Path relatorio_teste.html) {
+            $content = Get-Content -Path relatorio_teste.html -Raw
+            $content = $content -replace '<\s*br\s*/?>', '<br>' -replace '<\s*/\s*div\s*>', '</div>'
+            $processedName = "processed_relatorio_teste.html"
+            $content | Out-File -FilePath $processedName -Encoding utf8 -Force
+            Write-Output "Processed relatorio_teste.html to $processedName"
+        } else {
+            Write-Warning "File relatorio_teste.html not found!"
         }
 
     - name: Upload test reports
       uses: actions/upload-artifact@v4
       with:
         name: relatorios-automacao
-        path: |
-          processed_relatorio_standard.html
-          processed_relatorio_visual_true.html
-          processed_relatorio_problem.html
+        path: processed_relatorio_teste.html
         if-no-files-found: error
