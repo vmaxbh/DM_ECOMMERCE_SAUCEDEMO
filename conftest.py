@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from video_recorder import VideoRecorder
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -62,3 +63,21 @@ def delete_screenshot_folder():
 def pytest_html_report_title(report):
     """Hook para configurar o título do relatório HTML"""
     report.title = "DM- Teste de Capacitação Técnica - Maxwell e-commerce Saucedemo"
+
+
+@pytest.fixture(scope="function")
+def video_recorder(browser):
+    """Fixture para gerenciar a gravação de vídeo durante os testes"""
+    recorder = VideoRecorder(browser)
+    return recorder
+
+
+@pytest.fixture(autouse=True)
+def record_video(request, video_recorder):
+    """Fixture que inicia e para a gravação de vídeo automaticamente"""
+    if os.getenv("HEADLESS", "true").lower() == "true":
+        video_recorder.start_recording()
+        yield
+        video_recorder.stop_recording(request.node.name)
+    else:
+        yield
