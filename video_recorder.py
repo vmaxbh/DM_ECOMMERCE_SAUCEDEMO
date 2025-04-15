@@ -3,6 +3,7 @@ import os
 from selenium import webdriver
 from PIL import Image
 import io
+import imageio.v2 as imageio
 from moviepy.editor import ImageSequenceClip
 
 class VideoRecorder:

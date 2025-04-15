@@ -39,6 +39,22 @@ Este projeto consiste em uma automação de testes para o site de e-commerce Sau
 - Chrome Browser instalado
 - Git instalado
 
+### Variáveis de Ambiente
+O projeto utiliza variáveis de ambiente para controlar o modo de execução:
+
+- `HEADLESS`: Controla se o navegador será executado em modo headless
+  - `true`: Executa sem interface gráfica (recomendado para CI/CD)
+  - `false`: Executa com interface gráfica (recomendado para desenvolvimento)
+
+Para configurar as variáveis de ambiente no Windows (PowerShell):
+```powershell
+# Modo com interface gráfica
+$env:HEADLESS='false'
+
+# Modo headless
+$env:HEADLESS='true'
+```
+
 ### Instalação
 1. Clone o repositório:
 ```bash
@@ -110,3 +126,13 @@ Maxwell - [vmaxbh@gmail.com]
 
 ---
 Desenvolvido com ❤️ por Maxwell
+
+## 🎥 Gravação de Vídeos
+
+O projeto inclui funcionalidade de gravação de vídeos dos testes em execução:
+
+- Os vídeos são salvos no diretório `video/`
+- Formato: MP4
+- FPS: 10
+- Resolução: 800x600
+- Nome do arquivo: `{nome_do_teste}_{timestamp}.mp4`
