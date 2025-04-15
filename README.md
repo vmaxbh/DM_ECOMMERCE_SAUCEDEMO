@@ -1,45 +1,47 @@
 # Automação de Testes - E-commerce Saucedemo
 
-## 📋 Sobre o Projeto
-Este projeto consiste em uma automação de testes para o site de e-commerce Saucedemo, desenvolvido como parte do processo de capacitação técnica. A automação foi implementada utilizando Selenium WebDriver com Python, focando em testes de compra padrão.
+Este projeto implementa testes automatizados para o site de e-commerce Saucedemo, utilizando Selenium WebDriver, Python e pytest. O objetivo é validar o fluxo completo de compra, desde o login até a finalização do pedido.
 
 ## 🚀 Tecnologias Utilizadas
-- Python 3.9
-- Selenium WebDriver
-- pytest
-- pytest-html
-- pytest-metadata
-- GitHub Actions (CI/CD)
 
-## 🛠️ Estrutura do Projeto
-```
-.
-├── .github/
-│   └── workflows/
-│       └── ci_full.yml          # Configuração do GitHub Actions
-├── pages/
-│   ├── base_page.py            # Classe base para páginas
-│   ├── cart_page.py            # Página do carrinho
-│   ├── checkout_page.py        # Página de checkout
-│   ├── inventory_page.py       # Página de inventário
-│   ├── login_page.py           # Página de login
-│   └── product_page.py         # Página de produtos
-├── test_execution/
-│   └── test_execution_compra_standard.py  # Script de execução dos testes
-├── conftest.py                 # Configurações do pytest
-├── pytest.ini                  # Configurações do pytest
-├── requirements.txt            # Dependências do projeto
-└── README.md                   # Documentação do projeto
-```
+- **Python 3.9**
+- **Selenium WebDriver 4.18.1**
+- **Pytest 8.3.5**
+- **Pytest-HTML 4.1.1**
+- **Pytest-Metadata 3.1.1**
+- **MoviePy 1.0.3**
+- **Faker 24.9.0**
+- **ChromeDriver**
 
-## 🔧 Configuração do Ambiente
+## 📋 Pré-requisitos
 
-### Pré-requisitos
 - Python 3.9 instalado
 - Chrome Browser instalado
 - Git instalado
+- Ambiente virtual Python (recomendado)
+
+## 🔧 Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/DM_ECOMMERCE_SAUCEDEMO.git
+cd DM_ECOMMERCE_SAUCEDEMO
+```
+
+2. Crie e ative um ambiente virtual:
+```bash
+python -m venv venv
+.\venv\Scripts\activate  # Windows
+source venv/bin/activate  # Linux/Mac
+```
+
+3. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
 
 ### Variáveis de Ambiente
+
 O projeto utiliza variáveis de ambiente para controlar o modo de execução:
 
 - `HEADLESS`: Controla se o navegador será executado em modo headless
@@ -55,63 +57,184 @@ $env:HEADLESS='false'
 $env:HEADLESS='true'
 ```
 
-### Instalação
-1. Clone o repositório:
-```bash
-git clone [URL_DO_REPOSITÓRIO]
+## 🏗️ Estrutura do Projeto
+
+```
+DM_ECOMMERCE_SAUCEDEMO/
+├── classes/
+│   └── ecommerce_saucedemo/
+│       ├── __init__.py
+│       ├── login.py
+│       ├── products.py
+│       ├── checkout.py
+│       └── video_recorder.py
+├── pages/
+│   ├── __init__.py
+│   ├── base_page.py
+│   ├── login_page.py
+│   ├── inventory_page.py
+│   ├── product_page.py
+│   ├── cart_page.py
+│   └── checkout_page.py
+├── tests/
+│   └── id01_compra_standard/
+│       ├── __init__.py
+│       ├── id01_login.py
+│       ├── id02_product.py
+│       └── id03_checkout.py
+├── test_execution/
+│   └── test_execution_compra_standard.py
+├── video/
+├── .github/
+│   └── workflows/
+│       └── ci_full.yml
+├── pytest.ini
+├── requirements.txt
+└── README.md
 ```
 
-2. Instale as dependências:
-```bash
-pip install -r requirements.txt
+## 📊 Diagramas de Fluxo
+
+### Fluxo de Compra Padrão
+```mermaid
+flowchart TD
+    A[Início] --> B[Login]
+    B --> C[Navegar para Produtos]
+    C --> D[Selecionar Produto]
+    D --> E[Adicionar ao Carrinho]
+    E --> F[Ir para Carrinho]
+    F --> G[Iniciar Checkout]
+    G --> H[Preencher Informações]
+    H --> I[Finalizar Compra]
+    I --> J[Verificar Confirmação]
+    J --> K[Fim]
 ```
 
-3. Instale o ChromeDriver:
-```bash
-python -m pip install webdriver-manager
+### Fluxo de Execução dos Testes
+```mermaid
+flowchart LR
+    A[Início] --> B[Configurar Ambiente]
+    B --> C[Iniciar Navegador]
+    C --> D[Executar Testes]
+    D --> E[Capturar Screenshots]
+    E --> F[Gravar Vídeo]
+    F --> G[Gerar Relatório]
+    G --> H[Finalizar]
 ```
 
-## 🧪 Execução dos Testes
+### Arquitetura do Projeto
+```mermaid
+flowchart TB
+    subgraph "Test Execution"
+        A[test_execution_compra_standard.py]
+    end
+
+    subgraph "Page Objects"
+        B[BasePage]
+        C[LoginPage]
+        D[InventoryPage]
+        E[ProductPage]
+        F[CartPage]
+        G[CheckoutPage]
+    end
+
+    subgraph "Support Classes"
+        H[VideoRecorder]
+        I[TestLogin]
+        J[TestProducts]
+        K[TestCheckout]
+    end
+
+    A --> B
+    B --> C
+    B --> D
+    B --> E
+    B --> F
+    B --> G
+    A --> H
+    A --> I
+    A --> J
+    A --> K
+```
+
+### Pipeline CI/CD
+```mermaid
+flowchart LR
+    A[Push/PR] --> B[GitHub Actions]
+    B --> C[Setup Python]
+    C --> D[Install Chrome]
+    D --> E[Install Dependencies]
+    E --> F[Run Tests]
+    F --> G[Process Reports]
+    G --> H[Upload Artifacts]
+```
+
+## 📝 Configuração
+
+### pytest.ini
+O arquivo de configuração do pytest contém as seguintes configurações:
+```ini
+[pytest]
+addopts =
+    -v
+    --html=relatorio_teste.html
+    --self-contained-html
+    --capture=sys
+    --show-capture=log
+metadata =
+    Runner: GitHub Actions
+    Python: 3.9
+    Platform: Windows
+```
+
+### CI/CD Pipeline
+O pipeline está configurado no arquivo `.github/workflows/ci_full.yml` e executa:
+- Instalação do Chrome e ChromeDriver
+- Instalação das dependências Python
+- Execução dos testes
+- Geração e upload do relatório de testes
+
+## 🎯 Executando os Testes
 
 ### Localmente
-Para executar os testes localmente:
 ```bash
 pytest --html=relatorio_teste.html
 ```
 
 ### No GitHub Actions
-Os testes são executados automaticamente no GitHub Actions quando:
-- Um push é feito para o repositório
-- Um pull request é criado
+Os testes são executados automaticamente em:
+- Push para a branch principal
+- Pull requests
 
-## 📊 Relatório de Testes
-- O relatório é gerado automaticamente após a execução dos testes
-- O título do relatório é personalizado: "DM- Teste de Capacitação Técnica - Maxwell e-commerce Saucedemo"
-- O relatório é processado e disponibilizado como artefato no GitHub Actions
+## 📊 Relatórios
 
-## 🔄 Workflow do GitHub Actions
-O workflow está configurado para:
-1. Configurar o ambiente Python
-2. Instalar o Chrome e ChromeDriver
-3. Instalar as dependências
-4. Executar os testes
-5. Processar e enviar o relatório como artefato
+Os relatórios de teste são gerados em HTML e incluem:
+- Status dos testes
+- Screenshots em caso de falha
+- Vídeos da execução dos testes
+- Metadados do ambiente
 
-## 📝 Funcionalidades Testadas
-- Login no sistema
-- Navegação pelo inventário
-- Adição de produtos ao carrinho
-- Processo de checkout
-- Finalização de compra
+Os relatórios são salvos em:
+- Localmente: `relatorio_teste.html`
+- GitHub Actions: Disponível como artefato da execução
 
-## 🛡️ Configurações de Segurança
-- Modo headless para execução em ambiente CI
-- Modo anônimo do Chrome
-- Desabilitação de notificações e popups
-- Configurações de segurança do Chrome
+## 🎥 Gravação de Vídeos
+
+O projeto inclui funcionalidade de gravação de vídeos dos testes:
+- Os vídeos são salvos no diretório `video/`
+- Formato: MP4
+- Nomeação: `test_[nome_do_teste]_[timestamp].mp4`
+
+## 🔍 Monitoramento
+
+O pipeline inclui monitoramento de:
+- Status dos testes
+- Tempo de execução
+- Recursos utilizados
+- Qualidade do código
 
 ## 🤝 Contribuição
-Para contribuir com o projeto:
+
 1. Faça um fork do projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
@@ -119,21 +242,15 @@ Para contribuir com o projeto:
 5. Abra um Pull Request
 
 ## 📄 Licença
+
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
+## 🎯 Sobre este Projeto
+
+Este projeto foi desenvolvido como parte do processo seletivo para a vaga de QA Automation, demonstrando habilidades em automação de testes, boas práticas de desenvolvimento, e capacidade de implementar soluções robustas e escaláveis. A arquitetura e implementação refletem o compromisso com qualidade, manutenibilidade e eficiência no processo de testes.
+
 ## ✉️ Contato
-Maxwell - [vmaxbh@gmail.com]
 
+Maxwell - [vmaxbh@gmail.com](mailto:vmaxbh@gmail.com)
 
-## 🎥 Gravação de Vídeos
-
-O projeto inclui funcionalidade de gravação de vídeos dos testes em execução:
-
-- Os vídeos são salvos no diretório `video/`
-- Formato: MP4
-- FPS: 10
-- Resolução: 800x600
-- Nome do arquivo: `{nome_do_teste}_{timestamp}.mp4`
-
----
-Desenvolvido com ❤️ por Maxwell Viana
+Project Link: [https://github.com/seu-usuario/DM_ECOMMERCE_SAUCEDEMO](https://github.com/seu-usuario/DM_ECOMMERCE_SAUCEDEMO)
