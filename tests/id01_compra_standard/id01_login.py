@@ -21,6 +21,3 @@ class Teste01LoginStandard:
         step = "step_1"
         self.login_page.login(Credenciais.USUARIO_CORRETO, Credenciais.SENHA_CORRETA)
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
-
-
-

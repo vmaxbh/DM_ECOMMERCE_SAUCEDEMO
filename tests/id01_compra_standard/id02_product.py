@@ -29,8 +29,7 @@ class Teste02Products:
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
         step = "step_3"
         time.sleep(5)
-        self.base.get_element_clickable("//a[@class='shopping_cart_link']", timeout=20).click()
+        self.base.get_element_clickable(
+            "//a[@class='shopping_cart_link']", timeout=20
+        ).click()
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
-
-
-

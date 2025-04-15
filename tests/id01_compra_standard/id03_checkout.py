@@ -8,10 +8,10 @@ from classes.ecommerce_saucedemo.checkout import TestCheckout
 import time
 
 cenario = "id01_Compra_Standard"
-id_test = "test_id04"
+id_test = "test_id03"
 
 
-class Teste04CheckoutStandard:
+class Teste03Checkout:
     @pytest.fixture(autouse=True)
     def setup_method(self, browser):
         self.driver = browser
@@ -25,10 +25,11 @@ class Teste04CheckoutStandard:
         self.checkout.click_btn_checkout()
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
         step = "step_2"
-        self.checkout.click_save_and_continue()
+        self.checkout.registration_checkout()
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
         step = "step_3"
-        self.checkout.click_return_to_card()
+        self.checkout.click_btn_continue()
         self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)
-
-
+        step = "step_4"
+        self.checkout.validation_informations_checkout()
+        self.base.capture_screenshot(cenario, f"Evidencias {id_test}", step)

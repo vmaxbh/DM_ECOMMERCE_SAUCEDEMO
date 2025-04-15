@@ -4,13 +4,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from classes.base_class import BaseClass
 import time
 
+
 class LoginPage(BaseClass):
     def __init__(self, browser):
         super().__init__(browser)
         self.driver = browser
-        self.username_field = ("//input[@id='user-name']")
-        self.password_field = ("//input[@id='password']")
-        self.login_button = ("//input[@id='login-button']")
+        self.username_field = "//input[@id='user-name']"
+        self.password_field = "//input[@id='password']"
+        self.login_button = "//input[@id='login-button']"
 
     def login(self, usuario, senha):
         self.driver.get("https://www.saucedemo.com/")

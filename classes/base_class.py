@@ -31,16 +31,24 @@ class BaseClass:
         print(f"Screenshot salva em: {screenshot_path}")
 
     def get_element(self, xpath: str, timeout: int = 10) -> WebElement:
-        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located((By.XPATH, xpath))
+        )
 
     def get_element_visibility(self, xpath: str, timeout=10) -> WebElement:
-        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located((By.XPATH, xpath))
+        )
 
     def get_element_clickable(self, xpath: str, timeout=10) -> WebElement:
-        return WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+        return WebDriverWait(self.driver, timeout).until(
+            EC.element_to_be_clickable((By.XPATH, xpath))
+        )
 
     def get_element_presence(self, xpath: str, timeout=10) -> WebElement:
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
+        return WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located((By.XPATH, xpath))
+        )
 
     def scroll_to_element_webelement(self, element: WebElement):
         ActionChains(self.driver).scroll_to_element(element).perform()
@@ -59,7 +67,3 @@ class BaseClass:
 
     def exit_iframe(self):
         self.driver.switch_to.default_content()
-
-
-
-

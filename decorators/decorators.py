@@ -3,9 +3,7 @@ import time
 from functools import wraps
 
 
-
 logger = logging.getLogger(__name__)
-
 
 
 def retry(max_attempts=3, delay=1):
@@ -25,6 +23,3 @@ def retry(max_attempts=3, delay=1):
         return wrapper
 
     return decorator
-
-
-

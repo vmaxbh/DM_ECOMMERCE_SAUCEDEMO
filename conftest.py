@@ -31,7 +31,9 @@ def browser():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-notifications")  # Desabilita notificações
-    chrome_options.add_argument("--disable-popup-blocking")  # Permite popups se necessário
+    chrome_options.add_argument(
+        "--disable-popup-blocking"
+    )  # Permite popups se necessário
 
     driver = webdriver.Chrome(
         service=ChromeService(ChromeDriverManager().install()), options=chrome_options
