@@ -124,8 +124,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ## ✉️ Contato
 Maxwell - [vmaxbh@gmail.com]
 
----
-Desenvolvido com ❤️ por Maxwell
 
 ## 🎥 Gravação de Vídeos
 
@@ -136,3 +134,6 @@ O projeto inclui funcionalidade de gravação de vídeos dos testes em execuçã
 - FPS: 10
 - Resolução: 800x600
 - Nome do arquivo: `{nome_do_teste}_{timestamp}.mp4`
+
+---
+Desenvolvido com ❤️ por Maxwell Viana
