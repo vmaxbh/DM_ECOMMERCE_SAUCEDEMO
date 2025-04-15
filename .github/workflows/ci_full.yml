@@ -37,7 +37,8 @@ jobs:
     - name: Create pytest configuration
       shell: pwsh
       run: |
-        @"[pytest]
+        $config = @'
+        [pytest]
         addopts =
             -v
             --html=relatorio_teste.html
@@ -47,7 +48,9 @@ jobs:
         metadata =
             Runner: GitHub Actions
             Python: 3.9
-            Platform: Windows"@ > pytest.ini
+            Platform: Windows
+        '@
+        $config | Out-File -FilePath pytest.ini -Encoding utf8 -Force
 
     - name: Run Standard Test
       run: |
